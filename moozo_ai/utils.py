@@ -18,7 +18,7 @@ import cloudinary.api
 def download_models():
     hf_hub_download(
         repo_id='h94/IP-Adapter-FaceID',
-        filename='ip-adapter-faceid-plusv2_sdxl.bin',
+        filename='ip-adapter-faceid_sdxl.bin',
         local_dir='IP-Adapter-FaceID')
     hf_hub_download(
         repo_id='h94/IP-Adapter',
@@ -33,6 +33,7 @@ def download_models():
 def get_image_from_url(url):
     image = load_image(url)
     image = np.array(image.convert('RGB'))  
+    return image
 
 
 def get_face_embedding(url):

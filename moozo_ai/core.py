@@ -5,7 +5,7 @@ from ip_adapter.ip_adapter_faceid import IPAdapterFaceIDXL
 from utils import get_face_embedding
 
 base_model_path = "SG161222/RealVisXL_V3.0"
-ip_ckpt = "IP-Adapter-FaceID/ip-adapter-faceid-plusv2_sdxl.bin"
+ip_ckpt = "IP-Adapter-FaceID/ip-adapter-faceid_sdxl.bin"
 device = "cuda"
 
 def get_ip_model():
