@@ -2,7 +2,7 @@ import torch
 from diffusers import StableDiffusionXLPipeline, DDIMScheduler
 from PIL import Image
 from ip_adapter.ip_adapter_faceid import IPAdapterFaceIDXL
-from utils import get_face_embedding
+from moozo_ai.utils import get_face_embedding
 
 base_model_path = "SG161222/RealVisXL_V3.0"
 ip_ckpt = "IP-Adapter-FaceID/ip-adapter-faceid_sdxl.bin"

@@ -4,7 +4,6 @@ import torch
 from diffusers.utils import load_image
 import numpy as np
 from huggingface_hub import hf_hub_download
-from imgur_python import Imgur
 import os
 
 from dotenv import load_dotenv

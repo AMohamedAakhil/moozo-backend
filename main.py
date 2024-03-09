@@ -10,6 +10,7 @@ app = FastAPI()
 
 if not os.path.exists('IP-Adapter-FaceID'):
     download_models()
+    print("downloaded models")
 
 
 subprocess.run("mkdir", "-p", "saved")
