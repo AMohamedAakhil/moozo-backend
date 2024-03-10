@@ -9,4 +9,4 @@ uvicorn
 fastapi
 python-dotenv
 cloudinary
-runpod
+runpod==1.6.0
