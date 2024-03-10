@@ -6,8 +6,7 @@
 
 # Want to help us make this template better? Share your feedback here: https://forms.gle/ybq9Krt8jtBL3iCk7
 
-ARG PYTHON_VERSION=3.10.6
-FROM python:${PYTHON_VERSION} as base
+FROM runpod/base:0.4.0-cuda11.8.0
 
 # Prevents Python from writing pyc files.
 ENV PYTHONDONTWRITEBYTECODE=1
@@ -51,4 +50,4 @@ COPY . .
 EXPOSE 8000
 
 # Run the application.
-CMD uvicorn main:app --reload --port 8000 --host 0.0.0.0
+CMD python3.11 -u /main.py
