@@ -1,8 +1,7 @@
 import os
 from moozo_ai.utils import download_models, upload_to_cloud, save_pil_images
-import subprocess
+import runpod
 from moozo_ai.core import inference_ip_model, get_ip_model
-from typing import Optional
 
 if not os.path.exists('IP-Adapter-FaceID'):
     download_models()
@@ -10,16 +9,20 @@ if not os.path.exists('IP-Adapter-FaceID'):
 
 ip_model = get_ip_model()
 
-async def generate_images(prompt: str, image_url: str, 
-                          negative_prompt: Optional[str] = "monochrome, lowres, bad anatomy, worst quality, low quality, blurry",
-                          num_samples: Optional[int] = 2):
+async def generate_images(job):
+    job_prompt = job["prompt"]
+    job_image_url = job["image_url"]
+    job_negative_prompt = job["negative_prompt"]
+    job_num_samples = job["num_samples"]
     os.makedirs('saved', exist_ok=True)
-
+    if job_negative_prompt == "":
+        job_negative_prompt = "monochrome, lowres, bad anatomy, worst quality, low quality, blurry"
     try:
-        images_pil = inference_ip_model(ip_model, prompt, image_url, negative_prompt, num_samples)
+        images_pil = inference_ip_model(ip_model, job_prompt, job_image_url, job_negative_prompt, job_num_samples)
         save_pil_images(images_pil)
         links = upload_to_cloud()
         return {"links": links}
     except Exception as e:
         return {"error": str(e)}
     
+runpod.serverless.start({"generate_images": generate_images})
