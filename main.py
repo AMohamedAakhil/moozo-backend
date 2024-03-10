@@ -12,15 +12,14 @@ if not os.path.exists('IP-Adapter-FaceID'):
     download_models()
     print("downloaded models")
 
-
-subprocess.run("mkdir", "-p", "saved")
-
 ip_model = get_ip_model()
 
 @app.post("/generate_images/")
 async def generate_images(prompt: str, image_url: str, 
                           negative_prompt: Optional[str] = "monochrome, lowres, bad anatomy, worst quality, low quality, blurry",
                           num_samples: Optional[int] = 2):
+    os.makedirs('saved', exist_ok=True)
+
     try:
         images_pil = inference_ip_model(ip_model, prompt, image_url, negative_prompt, num_samples)
         save_pil_images(images_pil)
