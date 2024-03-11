@@ -14,8 +14,7 @@ async def generate_images(job):
     os.makedirs('saved', exist_ok=True)
     try:
         images_pil = inference_ip_model(ip_model, job_prompt, job_image_url, job_negative_prompt, job_num_samples)
-        save_pil_images(images_pil)
-        links = upload_to_cloud()
+        links = await upload_to_cloud(images_pil)
         return {"links": links}
     except Exception as e:
         return {"error": str(e)}

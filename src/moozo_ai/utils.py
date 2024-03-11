@@ -3,8 +3,8 @@ from insightface.app import FaceAnalysis
 import torch
 from diffusers.utils import load_image
 import numpy as np
-import os
-
+import io
+from PIL import Image
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -32,16 +32,23 @@ def save_pil_images(images):
     for i, image in enumerate(images):
         image.save(f"saved/image_{i}.png")
 
-def upload_to_cloud():          
+def image_to_byte_array(image: Image) -> bytes:
+  imgByteArr = io.BytesIO()
+  image.save(imgByteArr, format=image.format)
+  imgByteArr = imgByteArr.getvalue()
+  return imgByteArr
+
+def upload_to_cloud(images):          
     cloudinary.config( 
     cloud_name = "ddospzdve", 
     api_key = "496917724689965", 
     api_secret = "nkyggyOuBRdEwCaWEpjYIIwhf8U" 
     )
     urls = []
-    for image in os.listdir('saved'):
-        img_path = os.path.join('saved', image)
-        cloudinary.uploader.upload(img_path, public_id="quickstart_butterfly", unique_filename = False, overwrite=True)
-        srcURL = cloudinary.CloudinaryImage("quickstart_butterfly").build_url()
+    for image in images:
+        imgByteArr = image_to_byte_array(image)
+        res = cloudinary.uploader.upload(imgByteArr, use_filename=False, unique_filename = True, overwrite=False, folder="moozo_ai")
+        srcURL = res.get("url")
+        print("Uploaded URL: ", srcURL)
         urls.append(srcURL)
     return urls

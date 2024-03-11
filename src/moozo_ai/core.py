@@ -30,12 +30,13 @@ def get_ip_model():
     return ip_model
 
 def inference_ip_model(ip_model, prompt, image_url, 
-                       negative_prompt= "monochrome, lowres, bad anatomy, worst quality, low quality, blurry", num_samples=2):
+                       negative_prompt= "monochrome, lowres, bad anatomy, worst quality, low quality, blurry", num_samples=1):
     faceid_embeds = get_face_embedding(image_url)
     images = ip_model.generate(
-        prompt=prompt, negative_prompt=negative_prompt, faceid_embeds=faceid_embeds, num_samples=2,
+        prompt=prompt, negative_prompt=negative_prompt, faceid_embeds=faceid_embeds, num_samples=num_samples,
         width=1024, height=1024,
         num_inference_steps=30, guidance_scale=7.5, seed=2023
     )
+    print(images)
     return images
 
