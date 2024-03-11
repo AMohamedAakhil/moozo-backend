@@ -1,11 +1,7 @@
 import os
-from moozo_ai.utils import download_models, upload_to_cloud, save_pil_images
+from moozo_ai.utils import upload_to_cloud, save_pil_images
 import runpod
 from moozo_ai.core import inference_ip_model, get_ip_model
-
-if not os.path.exists('IP-Adapter-FaceID'):
-    download_models()
-    print("downloaded models")
 
 ip_model = get_ip_model()
 
@@ -25,4 +21,4 @@ async def generate_images(job):
     except Exception as e:
         return {"error": str(e)}
     
-runpod.serverless.start({"generate_images": generate_images})
+runpod.serverless.start({"handler": generate_images})
