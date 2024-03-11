@@ -5,8 +5,9 @@ FROM runpod/base:0.4.0-cuda11.8.0
 COPY builder/requirements.txt /requirements.txt
 RUN python3.11 -m pip install --upgrade pip
 RUN python3.11 -m pip install --upgrade -r /requirements.txt --no-cache-dir
+COPY src/moozo_ai/download_models.py /download_models.py
+RUN python3.11 /download_models.py
 ADD src .
-RUN python3.11 /moozo_ai/download_models.py
 
 # Add the source code
 

@@ -4,7 +4,7 @@ from PIL import Image
 from ip_adapter.ip_adapter_faceid import IPAdapterFaceIDXL
 from moozo_ai.utils import get_face_embedding
 
-base_model_path = "/Models/SG161222/RealVisXL_V3.0"
+base_model_path = "/Models"
 ip_ckpt = "/IP-Adapter-FaceID/ip-adapter-faceid_sdxl.bin"
 device = "cuda"
 

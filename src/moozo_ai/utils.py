@@ -32,8 +32,12 @@ def save_pil_images(images):
     for i, image in enumerate(images):
         image.save(f"saved/image_{i}.png")
 
-def upload_to_cloud():
-    config = cloudinary.config(secure=True)
+def upload_to_cloud():          
+    cloudinary.config( 
+    cloud_name = "ddospzdve", 
+    api_key = "496917724689965", 
+    api_secret = "nkyggyOuBRdEwCaWEpjYIIwhf8U" 
+    )
     urls = []
     for image in os.listdir('saved'):
         img_path = os.path.join('saved', image)
