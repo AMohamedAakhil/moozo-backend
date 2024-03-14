@@ -7,6 +7,7 @@ import io
 from PIL import Image
 from dotenv import load_dotenv
 load_dotenv()
+import os
 
 import cloudinary
 import cloudinary.uploader
@@ -34,11 +35,17 @@ def save_pil_images(images):
 
 
 def upload_to_cloud():
-    config = cloudinary.config(secure=True)
+    cloudinary.config( 
+     cloud_name = "ddospzdve", 
+     api_key = "496917724689965", 
+     api_secret = "nkyggyOuBRdEwCaWEpjYIIwhf8U" 
+     )
     urls = []
     for image in os.listdir('saved'):
         img_path = os.path.join('saved', image)
-        cloudinary.uploader.upload(img_path, public_id="quickstart_butterfly", unique_filename = False, overwrite=True)
-        srcURL = cloudinary.CloudinaryImage("quickstart_butterfly").build_url()
+        res =cloudinary.uploader.upload(img_path, use_filename=False,  unique_filename = True, overwrite=True, folder='moozo_ai')
+        srcURL = res.get("url")
+        print("Uploaded URL: ", srcURL)
         urls.append(srcURL)
     return urls
+
