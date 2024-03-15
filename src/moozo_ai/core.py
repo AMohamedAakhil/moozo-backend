@@ -8,6 +8,7 @@ ip_ckpt = "/IP-Adapter-FaceID/ip-adapter-faceid_sdxl.bin"
 device = "cuda"
 
 def get_ip_model():
+    print("ip: getting noise_sched")
     noise_scheduler = DDIMScheduler(
         num_train_timesteps=1000,
         beta_start=0.00085,
@@ -17,6 +18,7 @@ def get_ip_model():
         set_alpha_to_one=False,
         steps_offset=1,
     )
+    print("ip: got noise sched, getting xl pipe")
     pipe = StableDiffusionXLPipeline.from_pretrained(
         base_model_path,
         torch_dtype=torch.float16,
@@ -24,8 +26,11 @@ def get_ip_model():
         add_watermarker=False,
     )
 
+    print("ip: got pipe")
+
 
     ip_model = IPAdapterFaceIDXL(pipe, ip_ckpt, device)
+    print("ip: ip model ready")
     return ip_model
 
 def inference_ip_model(ip_model, prompt, image_url, 
