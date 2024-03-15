@@ -18,7 +18,7 @@ args = parser.parse_args()
 
 ip_model = get_ip_model()
 
-async def generate_images():
+def generate_images():
     job_prompt = args.prompt
     job_image_url = args.image_url
     job_negative_prompt = args.negative_prompt
