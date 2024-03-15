@@ -1,6 +1,5 @@
 import torch
 from diffusers import StableDiffusionXLPipeline, DDIMScheduler
-from PIL import Image
 from ip_adapter.ip_adapter_faceid import IPAdapterFaceIDXL
 from moozo_ai.utils import get_face_embedding
 

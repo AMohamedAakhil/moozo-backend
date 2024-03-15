@@ -3,10 +3,6 @@ from insightface.app import FaceAnalysis
 import torch
 from diffusers.utils import load_image
 import numpy as np
-import io
-from PIL import Image
-from dotenv import load_dotenv
-load_dotenv()
 import os
 
 import cloudinary
