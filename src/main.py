@@ -8,7 +8,6 @@ from moozo_ai.core import inference_ip_model, get_ip_model
 parser = argparse.ArgumentParser(description="Generate images using moozo_ai")
 
 # Define the arguments that the script accepts
-parser.add_argument('--input', help='The job input', required=True)
 parser.add_argument('--prompt', help='The job prompt', required=True)
 parser.add_argument('--image_url', help='The job image URL', required=True)
 parser.add_argument('--negative_prompt', help='The job negative prompt', required=True)
@@ -20,7 +19,6 @@ args = parser.parse_args()
 ip_model = get_ip_model()
 
 async def generate_images():
-    job_input = args.input
     job_prompt = args.prompt
     job_image_url = args.image_url
     job_negative_prompt = args.negative_prompt
