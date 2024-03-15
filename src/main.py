@@ -26,8 +26,11 @@ def generate_images():
     os.makedirs('saved', exist_ok=True)
     try:
         images_pil = inference_ip_model(ip_model, job_prompt, job_image_url, job_negative_prompt, job_num_samples)
+        print("got images in pil")
         save_pil_images(images_pil)
+        print("saved images")
         links = upload_to_cloud()
+        print("uploaded")
         return {"links": links}
     except Exception as e:
         return {"error": str(e)}
