@@ -17,6 +17,7 @@ parser.add_argument('--num_samples', type=int, help='The number of samples to ge
 args = parser.parse_args()
 
 ip_model = get_ip_model()
+print("main: ip done")
 
 def generate_images():
     job_prompt = args.prompt
